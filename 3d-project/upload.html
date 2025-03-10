@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <input type="file" id="modelUpload" accept=".glb,.gltf">
+    <script>
+        document.getElementById('modelUpload').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            
+            reader.onload = (event) => {
+                const loader = new THREE.GLTFLoader();
+                loader.parse(event.target.result, '', (gltf) => {
+                    scene.add(gltf.scene);
+                });
+            };
+            
+            reader.readAsArrayBuffer(file);
+        });
+    </script>
+</body>
+</html>
